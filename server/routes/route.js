@@ -1,0 +1,60 @@
+const {Router} = require('express');
+const User = require('../schemas/user.js');
+const Task = require('../schemas/task.js');
+const Project = require('../schemas/project.js');
+const UserController = require("../controllers/user.js");
+const connectDB = require('../database/mongoose.js');
+const routes = Router();
+routes.get('/',(req, res)=>{
+    return res.json({
+        message:'hello, im alive',
+        code: 200,
+    })
+});
+routes.get('/users', async(req, res)=>{
+    await connectDB();
+    const newUser = new User({
+        username: 'JohnDoe',
+        email: "john.doe@email.com",
+        password: '123456',
+    });
+    newUser.save()
+        .then((savedUser)=>{
+            console.log('User Saved! ', savedUser);
+        })
+        .catch((error) => {
+            console.log("Error Occurred: ", error);
+        })    
+});
+routes.get("/tasks", async(req, res) => {
+    await connectDB();
+    const newTask = new Task({
+        title: "New Task",
+        description: "Do something!",
+        status: "in progress",
+    });
+    newTask.save()
+        .then((savedTask) => {
+            console.log("Task Saved! ", savedTask);
+        })
+        .then((error) => {
+            console.log("Error Occurred!", error);
+        })
+});
+routes.get("/projects", async(req, res) => {
+    await connectDB();
+    const newProject = new Project({
+        title: "John Doe's Project",
+        description: "Forex Web Application Project",
+    });
+    newProject.save()
+        .then((savedProject) => {
+            console.log("Saved Project!", savedProject);
+        })
+        .then((error) => {
+            console.log("Error Occurred!", error);
+        })
+});
+routes.post("/createUser", UserController.signUp);
+
+module.exports = routes;
