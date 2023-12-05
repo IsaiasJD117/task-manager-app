@@ -23,7 +23,7 @@ class UserService{
                 email: email,
                 password: hashedPassword,
             });
-            const newSavedUser = await newUser.save()
+            const newSavedUser = await newUser.save();
             return {user: { _id: newSavedUser._id, username: newSavedUser.username, email: newSavedUser.email }};
         }catch(error){
             console.error(error);

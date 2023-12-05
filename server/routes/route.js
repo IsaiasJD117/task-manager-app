@@ -3,6 +3,7 @@ const User = require('../schemas/user.js');
 const Task = require('../schemas/task.js');
 const Project = require('../schemas/project.js');
 const UserController = require("../controllers/user.js");
+const TaskController = require('../controllers/task.js');
 const connectDB = require('../database/mongoose.js');
 const routes = Router();
 routes.get('/',(req, res)=>{
@@ -56,5 +57,6 @@ routes.get("/projects", async(req, res) => {
         })
 });
 routes.post("/createUser", UserController.signUp);
+routes.post("/createTask", TaskController.taskBoard);
 
 module.exports = routes;
