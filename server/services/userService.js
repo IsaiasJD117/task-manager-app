@@ -11,6 +11,15 @@ class UserService{
         }
     }
 
+    async getUserByEmail(email){
+
+        try{
+            return await User.findOne(email);
+        }catch(error){
+            return error;
+        }
+    }
+
     async createUser({username, email, password}){
         try{
             let existingUser = await User.findOne({email});
@@ -48,4 +57,4 @@ class UserService{
     }
 };
 
-module.exports = UserService;
+module.exports = new UserService();

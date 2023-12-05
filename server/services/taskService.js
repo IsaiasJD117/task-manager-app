@@ -2,6 +2,33 @@ const Task = require("../schemas/task");
 
 class TaskService{
 
+    async getTaskById(taskId){
+        try{
+            const task = await Task.findById(taskId);
+            return task;
+        }catch(error){
+            return error;
+        }
+    }
+
+    async getTaskByUser(user){
+        try{
+            const task = await Task.find({assignedTo: user});
+            return task;
+        }catch(error){
+            return error;
+        }
+    }
+
+    async getTaskByProject(project){
+        try{
+            const task = await Task.find({assignedTo: project});
+            return task;
+        }catch(error){
+            return error;
+        }
+    }
+    
     //create task
     async createTask({title, description, dueDate}){
         try{

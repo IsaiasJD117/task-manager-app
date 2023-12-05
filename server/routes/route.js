@@ -57,6 +57,9 @@ routes.get("/projects", async(req, res) => {
         })
 });
 routes.post("/createUser", UserController.signUp);
-routes.post("/createTask", TaskController.taskBoard);
+routes.post("/createTask", TaskController.createTask);
+routes.post("/logIn", UserController.logIn);
+routes.get("/getUserById/:userId", UserController.getById);
+routes.get("/getUserByEmail/:email", UserController.getByEmail);
 
 module.exports = routes;

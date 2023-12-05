@@ -29,7 +29,7 @@ const taskSchema = new mongoose.Schema({
     },
     project: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Projects'
+        ref: 'Project'
     },
     assignedTo: {
         type: mongoose.Schema.Types.ObjectId,
