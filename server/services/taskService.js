@@ -11,18 +11,18 @@ class TaskService{
         }
     }
 
-    async getTaskByUser(user){
+    async getTaskByUser(userId){
         try{
-            const task = await Task.find({assignedTo: user});
+            const task = await Task.find({assignedTo: userId});
             return task;
         }catch(error){
             return error;
         }
     }
 
-    async getTaskByProject(project){
+    async getTaskByProject(projectId){
         try{
-            const task = await Task.find({assignedTo: project});
+            const task = await Task.find({assignedTo: projectId});
             return task;
         }catch(error){
             return error;
@@ -63,4 +63,4 @@ class TaskService{
     }
     
 };
-module.exports = TaskService;
+module.exports = new TaskService();

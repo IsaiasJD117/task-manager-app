@@ -6,7 +6,7 @@ class ProjectController{
         try{
             const {title, description, userId, projectId} = req.body;
             if(!title || !description || !userId || !projectId){
-                return req.status(400).json({error: "Bad Request!"});
+                return res.status(400).json({error: "Bad Request!"});
             }
             const result = await ProjectService.createProject({
                 title: title,
@@ -22,7 +22,21 @@ class ProjectController{
             res.status(500).json({error: error.message});
         }
     }
-
+    async getProject(req, res){
+        try{
+            const { title, description, userId, projectId } = req.body;
+        if(!title || !description || !userId || !projectId){
+            throw new Error("Bad Request!");
+        }
+        const project = await Project.find({ title: title, description: description, userId: userId, projectId: projectId });
+        if(project.error){
+            return res.status(400).json({error: project.error})
+        }
+        res.status(201).json(project);
+        }catch(error){
+            res.status(500).json({error: error.message})
+        }
+    }
     async updateProject(req, res){
         try{
             const projectId = req.params.projectId;
