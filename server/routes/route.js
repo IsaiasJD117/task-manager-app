@@ -4,6 +4,7 @@ const Task = require('../schemas/task.js');
 const Project = require('../schemas/project.js');
 const UserController = require("../controllers/user.js");
 const TaskController = require('../controllers/task.js');
+const ProjectController = require('../controllers/project.js');
 const connectDB = require('../database/mongoose.js');
 const routes = Router();
 routes.get('/',(req, res)=>{
@@ -58,6 +59,11 @@ routes.get("/projects", async(req, res) => {
 });
 routes.post("/createUser", UserController.signUp);
 routes.post("/createTask", TaskController.createTask);
+routes.post("/updateTask", TaskController.updateTask);
+routes.delete("/deleteTask", TaskController.deleteTask);
+routes.post("/createProject", ProjectController.createProject);
+routes.post("/updateProject", ProjectController.updateProject);
+routes.delete("/deleteProject", ProjectController.deleteProject);
 routes.post("/logIn", UserController.logIn);
 routes.get("/getUserById/:userId", UserController.getById);
 routes.get("/getUserByEmail/:email", UserController.getByEmail);

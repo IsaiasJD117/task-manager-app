@@ -7,7 +7,7 @@ class TaskController{
             if( !title || !description || !dueDate || !userId || !projectId){
                 return req.status(400).json({error: "Bad Request!"})
             }
-            const result = await new TaskService.createTask({
+            const result = await TaskService.createTask({
                 title: title,
                 description: description,
                 dueDate: dueDate,
@@ -36,6 +36,31 @@ class TaskController{
         res.status(201).json(task);
         }catch(error){
             console.log(error);
+        }
+    }
+    async updateTask(req, res){
+        try{
+            const taskId = req.params.taskId;
+            const updateData = req.body;
+            
+            const updatedTask = await TaskService.updateTask(taskId, updateData);
+            if(!updateData){
+                return res.status(404).json({error: "Task not found!"})
+            }
+            res.status(200).json(updatedTask);
+        }catch(error){
+            res.status(500).json({error: error.message})
+        }
+    }
+
+    async deleteTask(req, res){
+        try{
+            const taskId = req.params.taskId;
+
+            await Task.findByIdAndDelete(taskId);
+            res.status(200).json({message: "Task successfully deleted"});
+        }catch(error){
+            res.status(500).json({error: error.message});
         }
     }
 };
