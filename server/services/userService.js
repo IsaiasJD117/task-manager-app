@@ -33,7 +33,7 @@ class UserService{
                 password: hashedPassword,
             });
             const newSavedUser = await newUser.save();
-            return {user: { _id: newSavedUser._id, username: newSavedUser.username, email: newSavedUser.email }};
+            return {user: { _id: newSavedUser._id, username: newSavedUser.username, email: newSavedUser.email}};
         }catch(error){
             console.error(error);
             return error;

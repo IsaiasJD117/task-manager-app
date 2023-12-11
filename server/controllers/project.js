@@ -32,7 +32,7 @@ class ProjectController{
         if(project.error){
             return res.status(400).json({error: project.error})
         }
-        res.status(201).json(project);
+        res.status(201).json({project});
         }catch(error){
             res.status(500).json({error: error.message})
         }

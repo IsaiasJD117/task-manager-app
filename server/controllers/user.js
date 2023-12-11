@@ -4,7 +4,7 @@ class UserController{
         try{
             const { username, email, password } = req.body;
             if( !username || !email || !password){
-                return req.status(400).json({error: "Bad Request!"})
+                return res.status(400).json({error: "Bad Request!"})
             }
             const result = await UserService.createUser({
                 username: username,
